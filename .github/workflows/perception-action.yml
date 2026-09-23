@@ -1,0 +1,15 @@
+name: CEREBRON F113 ELYRA perception action
+on:
+  push:
+    paths: ["worker/perception_action.py", ".github/workflows/perception-action.yml"]
+  workflow_dispatch:
+jobs:
+  loop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python worker/perception_action.py
+      - uses: actions/upload-artifact@v4
+        with: {name: f113-perception-action, path: artifacts/perception_action.json}
