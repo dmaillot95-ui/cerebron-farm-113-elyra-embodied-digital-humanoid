@@ -1,0 +1,15 @@
+name: CEREBRON F113 ELYRA embodied canary
+on:
+  push:
+    paths: ["worker/elyra_canary.py", ".github/workflows/elyra-canary.yml"]
+  workflow_dispatch:
+jobs:
+  elyra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python worker/elyra_canary.py
+      - uses: actions/upload-artifact@v4
+        with: {name: f113-elyra-state, path: artifacts/elyra_state.json}
